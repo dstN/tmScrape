@@ -1,7 +1,7 @@
 # tmScrape
 local web scraping of the (max first 25 entries) transfer records from transfermarkt.com
 # usage
-just clone/download the repository and open index.html in your browser.
+just clone/download the repository and open index.html in your browser. wait until background gets grey or the text gets smaller. then copy everything.
 # format
 every player comes in a json-object. with following data within:
 * Rank within his Transfer-Year
