@@ -4,40 +4,35 @@ var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/
 
 for (i=startDate; i <= 1960; i++) { // iterate until current year - change to endDate in production mode
   $.get(getUrl + i, function(data){ // get the page of current year
-    $(".loader").html(data);
-    var tableRows = $(".loader").find(".items>tbody>tr");
-    tableRows.each(function(){
-      var innerHTML = $(this).html();
-      var rank = $(this).find(">td:first-of-type").text();
-      var picture = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td:first-of-type>img").attr("src");
-      var playerLink = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").attr("href");
-      var playerID = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").attr("id");
-      var playerName = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").text();
-      var position = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:last-of-type>td").text();
-      var year = $(this).find(">td:nth-of-type(3)>a").text();
-      var nationalities = $(this).find(">td:nth-of-type(4)>img");
-      if(nationalities.length===2){
-        var nationalityOne = nationalities.eq(0).attr("alt");
+    $(".loader").html(data); // load i-year into .loader-Element
+    var tableRows = $(".loader").find(".items>tbody>tr"); // select every table-row (player)
+    tableRows.each(function(){ // function for every player within table
+      var rank = $(this).find(">td:first-of-type").text(); // get rank within year
+      var picture = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td:first-of-type>img").attr("src"); // get playerpicture
+      var playerLink = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").attr("href"); //get playerLink to transfermarkt.com
+      var playerID = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").attr("id"); // get playerID
+      var playerName = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").text(); // get playerName
+      var position = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:last-of-type>td").text(); // get players position
+      var year = $(this).find(">td:nth-of-type(3)>a").text(); // get year of transfer
+      var nationalities = $(this).find(">td:nth-of-type(4)>img"); // get nationalities
+      if(nationalities.length===2){ // check if there are 2 nationaities
+        var nationalityOne = nationalities.eq(0).attr("alt"); // get both nationalities
         var nationalityTwo = nationalities.eq(1).attr("alt");
         var flagOne = nationalities.eq(0).attr("src");
         var flagTwo = nationalities.eq(1).attr("src");
       }
       else {
-        var nationalityOne = nationalities.attr("alt");
+        var nationalityOne = nationalities.attr("alt"); // get just first nationality
         var flagOne = nationalities.attr("src");
-        var nationalityTwo = "none";
+        var nationalityTwo = "none"; // default value for 2nd nationality
         var flagTwo = "none";
       }
-      var joinedClub = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:last-of-type>a").text();
-      var joinedClubLink = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:last-of-type>a").attr("href");
-      var clubEmblem = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:first-of-type>a>img").attr("src");
-      var leagueNationality = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("alt");
-      var leagueNationalityFlag = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("src");
-      var transferFee = $(this).find(">td:last-of-type>a").text();
-
-
-
-      //$(".table>table>tbody").append("<tr>"+innerHTML+"</tr>");
+      var joinedClub = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:last-of-type>a").text(); // get joinedClub
+      var joinedClubLink = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:last-of-type>a").attr("href"); // get the transfermarkt.com link to the club
+      var clubEmblem = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:first-of-type>a>img").attr("src"); // get emblem of clb
+      var leagueNationality = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("alt"); // get nationality of joined league
+      var leagueNationalityFlag = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("src"); // get flag of joined leagues nationality
+      var transferFee = $(this).find(">td:last-of-type>a").text(); // get transfer fee
 
       var playerObj = {
         rank: rank,
@@ -57,8 +52,8 @@ for (i=startDate; i <= 1960; i++) { // iterate until current year - change to en
         leagueNationalityFlag: leagueNationalityFlag,
         transferFee: transferFee
       };
-      var playerJSON = JSON.stringify(playerObj);
-      $(".json").append("<p id='"+playerID+"'>"+playerJSON+"</p>");
+      var playerJSON = JSON.stringify(playerObj); // object to JSON
+      $(".json").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
     });
   });
 }
