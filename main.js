@@ -14,6 +14,7 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
       var playerName = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").text(); // get playerName
       var position = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:last-of-type>td").text(); // get players position
       var year = $(this).find(">td:nth-of-type(3)>a").text(); // get year of transfer
+      var yearLink = $(this).find(">td:nth-of-type(3)>a").attr("href"); // get yearLink of transfer
       var nationalities = $(this).find(">td:nth-of-type(4)>img"); // get nationalities
       if(nationalities.length===2){ // check if there are 2 nationaities
         var nationalityOne = nationalities.eq(0).attr("alt"); // get both nationalities
@@ -43,6 +44,7 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
         playerName: playerName,
         position: position,
         year: year,
+        yearLink: "https://www.transfermarkt.com" + yearLink,
         nationalityOne: nationalityOne,
         nationalityTwo: nationalityTwo,
         flagOne: flagOne,

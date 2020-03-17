@@ -10,6 +10,7 @@ every player comes in a json-object. with following data within:
 * Player Name
 * Players Position
 * Year of the transfer
+* Link to the year of the transfer
 * Nationalit(ies)(y)
 * Nationality-Flag(s)
 * The joined Club
