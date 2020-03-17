@@ -21,3 +21,4 @@ every player comes in a json-object. with following data within:
 * League league
 * League Link
 * Transfer Fee
+* Transfer history link

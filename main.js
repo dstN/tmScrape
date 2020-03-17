@@ -36,6 +36,7 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
       var leagueName = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>a").text(); // get leagueName of joined league
       var leagueLink = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>a").attr("href"); // get leagueLink of joined league
       var transferFee = $(this).find(">td:last-of-type>a").text(); // get transfer fee
+      var transferHistoryLink = $(this).find(">td:last-of-type>a").attr("href"); // get transfer history link
 
       var playerObj = {
         rank: rank,
@@ -56,7 +57,8 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
         leagueNationalityFlag: leagueNationalityFlag,
         leagueName: leagueName,
         leagueLink: "https://www.transfermarkt.com" + leagueLink,
-        transferFee: transferFee
+        transferFee: transferFee,
+        transferHistoryLink: "https://www.transfermarkt.com" + transferHistoryLink
       };
       var playerJSON = JSON.stringify(playerObj); // object to JSON
       $(".json").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
