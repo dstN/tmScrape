@@ -32,6 +32,8 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
       var clubEmblem = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:first-of-type>td:first-of-type>a>img").attr("src"); // get emblem of clb
       var leagueNationality = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("alt"); // get nationality of joined league
       var leagueNationalityFlag = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("src"); // get flag of joined leagues nationality
+      var leagueName = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>a").text(); // get leagueName of joined league
+      var leagueLink = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>a").attr("href"); // get leagueLink of joined league
       var transferFee = $(this).find(">td:last-of-type>a").text(); // get transfer fee
 
       var playerObj = {
@@ -50,6 +52,8 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
         clubEmblem: clubEmblem,
         leagueNationality: leagueNationality,
         leagueNationalityFlag: leagueNationalityFlag,
+        leagueName: leagueName,
+        leagueLink: "https://www.transfermarkt.com" + leagueLink,
         transferFee: transferFee
       };
       var playerJSON = JSON.stringify(playerObj); // object to JSON

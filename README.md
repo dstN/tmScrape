@@ -17,4 +17,6 @@ every player comes in a json-object. with following data within:
 * Emblem of the joined Club
 * League Nationality
 * League Nationality Flag
+* League league
+* League Link
 * Transfer Fee
