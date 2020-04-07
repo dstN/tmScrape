@@ -2,9 +2,10 @@ var startDate = 1956; // first year a transfer fee was recorded on transfermarkt
 var endDate = new Date().getFullYear(); // current Year
 var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/top/saison_id/"; // ADD Year after saison_id/
 
-for (i=startDate; i <= endDate; i++) { // iterate until current year - change to endDate in production mode
-  $(".json").append("<div class='"+i+"'></div>");
-  $.get(getUrl + i, function(data){ // get the page of current year
+for (i=startDate; i <= 1957; i++) { // iterate until current year - change to endDate in production mode
+  var currentYear = i;
+  $(".json").append("<div class='"+currentYear+"'></div>");
+  $.get(getUrl + currentYear, function(data){ // get the page of current year
     $(".loader").html(data); // load i-year into .loader-Element
     var tableRows = $(".loader").find(".items>tbody>tr"); // select every table-row (player)
     tableRows.each(function(){ // function for every player within table
