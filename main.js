@@ -2,9 +2,11 @@ var startDate = 1956; // first year a transfer fee was recorded on transfermarkt
 var endDate = new Date().getFullYear(); // current Year
 var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/top/saison_id/"; // ADD Year after saison_id/
 
-for (i=startDate; i <= 1957; i++) { // iterate until current year - change to endDate in production mode
+for (i=startDate; i <= endDate; i++) { // iterate until current year - change to endDate in production mode
   var currentYear = i;
-  $(".json").append("<div class='"+currentYear+"'></div>");
+  var currentYearString = '"'+i+'"';
+  $(".json").append('<div class="'+currentYear+' before">'+currentYearString+': [ </div>');
+  $(".json").append('<div class="'+currentYear+' after"></div>');
   $.get(getUrl + currentYear, function(data){ // get the page of current year
     $(".loader").html(data); // load i-year into .loader-Element
     var tableRows = $(".loader").find(".items>tbody>tr"); // select every table-row (player)
@@ -15,8 +17,8 @@ for (i=startDate; i <= 1957; i++) { // iterate until current year - change to en
       var playerID = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").attr("id"); // get playerID
       var playerName = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").text(); // get playerName
       var position = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:last-of-type>td").text(); // get players position
-      var year = $(this).find(">td:nth-of-type(3)>a").text(); // get year of transfer
-      var yearLink = $(this).find(">td:nth-of-type(3)>a").attr("href"); // get yearLink of transfer
+      var year = $("select[name='saison_id'] option[selected='selected']").val(); // get year of transfer
+      var yearLink = getUrl + year; // get yearLink of transfer
       var nationalities = $(this).find(">td:nth-of-type(4)>img"); // get nationalities
       if(nationalities.length===2){ // check if there are 2 nationaities
         var nationalityOne = nationalities.eq(0).attr("alt"); // get both nationalities
@@ -48,7 +50,7 @@ for (i=startDate; i <= 1957; i++) { // iterate until current year - change to en
         playerName: playerName,
         position: position,
         year: year,
-        yearLink: "https://www.transfermarkt.com" + yearLink,
+        yearLink: yearLink,
         nationalityOne: nationalityOne,
         nationalityTwo: nationalityTwo,
         flagOne: flagOne,
@@ -64,8 +66,13 @@ for (i=startDate; i <= 1957; i++) { // iterate until current year - change to en
         transferHistoryLink: "https://www.transfermarkt.com" + transferHistoryLink
       };
       var playerJSON = JSON.stringify(playerObj); // object to JSON
-      console.log(i);
-      $("."+i+"").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
+      $("."+year+".before").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
     });
+    $(".loader").empty();
   });
+  $("."+currentYear+".after").append("<span>],</span>");
+  if(currentYear===endDate) {
+    console.log("I AM HERE AT LAST NOTICE ME SENPAI");
+    $(".before p").not(":last").append("<span>,</span>");
+  }
 }
