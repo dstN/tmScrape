@@ -3,6 +3,7 @@ var endDate = new Date().getFullYear(); // current Year
 var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/top/saison_id/"; // ADD Year after saison_id/
 
 for (i=startDate; i <= endDate; i++) { // iterate until current year - change to endDate in production mode
+  $(".json").append("<div class='"+i+"'></div>");
   $.get(getUrl + i, function(data){ // get the page of current year
     $(".loader").html(data); // load i-year into .loader-Element
     var tableRows = $(".loader").find(".items>tbody>tr"); // select every table-row (player)
@@ -38,7 +39,8 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
       var transferFee = $(this).find(">td:last-of-type>a").text(); // get transfer fee
       var transferHistoryLink = $(this).find(">td:last-of-type>a").attr("href"); // get transfer history link
 
-      var playerObj = {
+      var playerObj =
+      {
         rank: rank,
         picture: picture,
         playerLink: "https://www.transfermarkt.com" + playerLink,
@@ -61,7 +63,8 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
         transferHistoryLink: "https://www.transfermarkt.com" + transferHistoryLink
       };
       var playerJSON = JSON.stringify(playerObj); // object to JSON
-      $(".json").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
+      console.log(i);
+      $("."+i+"").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
     });
   });
 }
