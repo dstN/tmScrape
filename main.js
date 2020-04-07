@@ -7,7 +7,7 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
   var currentYearString = '"'+i+'"';
   $(".json").append('<div class="'+currentYear+' before">'+currentYearString+': [ </div>');
   $(".json").append('<div class="'+currentYear+' after"></div>');
-  $.get(getUrl + currentYear, function(data){ // get the page of current year
+  $.get(getUrl + currentYear, function(data){}).done(function(data) { // get the page of current year
     $(".loader").html(data); // load i-year into .loader-Element
     var tableRows = $(".loader").find(".items>tbody>tr"); // select every table-row (player)
     tableRows.each(function(){ // function for every player within table
@@ -71,8 +71,4 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
     $(".loader").empty();
   });
   $("."+currentYear+".after").append("<span>],</span>");
-  if(currentYear===endDate) {
-    console.log("I AM HERE AT LAST NOTICE ME SENPAI");
-    $(".before p").not(":last").append("<span>,</span>");
-  }
 }
