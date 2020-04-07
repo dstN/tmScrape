@@ -2,7 +2,7 @@ var startDate = 1956; // first year a transfer fee was recorded on transfermarkt
 var endDate = new Date().getFullYear(); // current Year
 var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/top/saison_id/"; // ADD Year after saison_id/
 
-for (i=startDate; i <= endDate; i++) { // iterate until current year - change to endDate in production mode
+for (i=startDate; i <= 1958; i++) { // iterate until current year - change to endDate in production mode
   var currentYear = i;
   var currentYearString = '"'+i+'"';
   $(".json").append('<div class="'+currentYear+' before">'+currentYearString+': [ </div>');
@@ -39,7 +39,16 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
       var leagueNationalityFlag = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>img").attr("src"); // get flag of joined leagues nationality
       var leagueName = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>a").text(); // get leagueName of joined league
       var leagueLink = $(this).find(">td:nth-of-type(5)").find("table>tbody>tr:last-of-type>td:first-of-type>a").attr("href"); // get leagueLink of joined league
-      var transferFee = $(this).find(">td:last-of-type>a").text(); // get transfer fee
+      var transferFee = $(this).find(">td:last-of-type>a").text().replace("€", ""); // get transfer fee
+      var feeFull;
+      if(transferFee.indexOf('k') > -1) {
+        feeFull = transferFee.replace('k', '');
+        feeFull = feeFull * 1000
+      }
+      else if(transferFee.indexOf('m') > -1) {
+        feeFull = transferFee.replace('m', '');
+        feeFull = feeFull * 1000000
+      };
       var transferHistoryLink = $(this).find(">td:last-of-type>a").attr("href"); // get transfer history link
 
       var playerObj =
@@ -62,7 +71,7 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
         leagueNationalityFlag: leagueNationalityFlag,
         leagueName: leagueName,
         leagueLink: "https://www.transfermarkt.com" + leagueLink,
-        transferFee: transferFee,
+        transferFee: feeFull,
         transferHistoryLink: "https://www.transfermarkt.com" + transferHistoryLink
       };
       var playerJSON = JSON.stringify(playerObj); // object to JSON
