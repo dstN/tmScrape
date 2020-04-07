@@ -80,7 +80,6 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
     });
     $(".loader").empty();
   }).done(function(){
-      $(".before>p").not(":last-of-type").remove("span").append("<span>,</span");
       $(".after:last-of-type").empty().append("<span>]</span>");
   });
   $("."+currentYear+".after").append("<span>],</span>");
