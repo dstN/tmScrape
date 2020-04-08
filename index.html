@@ -8,8 +8,15 @@
         visibility: hidden !important;
       }
       .table {
+        display: none !important;
+        visibility: hidden !important;
+      }
+      .copy {
         display: block !important;
         visibility: visible !important;
+      }
+      .copy #copy, .copy button {
+        display: none;
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -19,24 +26,23 @@
 
     </div>
     <div class="table">
-      <table>
-        <thead>
-
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
-      <div class="start">
+      <span class="start">
         {
-      </div>
+      </span>
       <div class="json">
 
 
       </div>
-      <div class="end">
+      <span class="end">
         }
-      </div>
+      </span>
+    </div>
+    <div class="copy">
+      <textarea id="copy" rows="12" cols="100"></textarea>
+      <br>
+      <button onclick="copyFunction()">
+        Copy to clipboard
+      </button>
     </div>
     <script type="text/javascript" src="main.js"></script>
   </body>
