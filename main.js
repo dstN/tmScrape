@@ -5,9 +5,11 @@ var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/
 for (i=startDate; i <= endDate; i++) { // iterate until current year - change to endDate in production mode
   var currentYear = i;
   var currentYearString = '"'+i+'"';
+  console.log('Line ' + i);
   $(".json").append('<div class="'+currentYear+' before">'+currentYearString+': [ </div>');
   $(".json").append('<div class="'+currentYear+' after"></div>');
   $.get(getUrl + currentYear, function(data){}).done(function(data) { // get the page of current year
+    console.log('Get-Line ' + currentYear);
     $(".loader").html(data); // load i-year into .loader-Element
     var tableRows = $(".loader").find(".items>tbody>tr"); // select every table-row (player)
     tableRows.each(function(){ // function for every player within table
@@ -82,3 +84,4 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
   });
   $("."+currentYear+".after").append("<span>],</span>");
 }
+console.log("For Loop done!");
