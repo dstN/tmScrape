@@ -79,8 +79,6 @@ for (i=startDate; i <= endDate; i++) { // iterate until current year - change to
       $("."+year+".before").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
     });
     $(".loader").empty();
-  }).done(function(){
-      $(".after:last-of-type").empty().append("<span>]</span>");
   });
   $("."+currentYear+".after").append("<span>],</span>");
 }
