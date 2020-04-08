@@ -3,7 +3,7 @@ local web scraping of the (max first 25 entries) transfer records from transferm
 # usage
 Just clone/download the repository and open index.html in your browser.
 
-Wait until "Scarping done!" appears and click on "Copy to clipboard"
+Wait until "Scraping done!" appears and click on "Copy to clipboard"
 
 It takes a moment until it copies everything. If it's done copying you get an alert.
 
