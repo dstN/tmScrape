@@ -2,23 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <style>
-      body>*{
-        display: none !important;
-        visibility: hidden !important;
-      }
-      .table {
-        display: none !important;
-        visibility: hidden !important;
-      }
-      .copy {
-        display: block !important;
-        visibility: visible !important;
-      }
-      .copy #copy, .copy button {
-        display: none;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
@@ -38,8 +22,8 @@
       </span>
     </div>
     <div class="copy">
+      <h1 class="loadingScrape">Scraping...</h1>
       <textarea id="copy" rows="12" cols="100"></textarea>
-      <br>
       <button onclick="copyFunction()">
         Copy to clipboard
       </button>

@@ -1,0 +1,127 @@
+html {
+  font-family: Verdana, sans-serif;
+  background-color: #252525;
+  color: #fff;
+  font-size: 16px;
+}
+::selection {
+  background: #e03100;
+  color: #fff;
+}
+::-moz-selection {
+  background: #e03100;
+  color: #fff;
+}
+body>*{
+  display: none !important;
+  visibility: hidden !important;
+}
+.table {
+  display: none !important;
+  visibility: hidden !important;
+}
+.copy {
+  display: block !important;
+  visibility: visible !important;
+}
+.loadingScrape {
+  opacity: 0;
+  visibility: hidden;
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7),
+    	         5px 5px 1px rgba(225, 225, 225, 0.7),
+               6px 6px 2px rgba(0,0,0,0.7),
+               10px 10px 1px rgba(180, 180, 180, 0.7),
+               11px 11px 2px rgba(0,0,0,0.7),
+               15px 15px 1px rgba(120, 120, 120, 0.7),
+               16px 16px 2px rgba(0,0,0,0.7);
+  -webkit-animation: text-snake 1s infinite alternate;
+  -moz-animation: text-snake 1s infinite alternate;
+  -ms-animation: text-snake 1s infinite alternate;
+  animation: text-snake 1s infinite alternate;
+}
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: all ease-in-out 1.5s;
+}
+.doneScrape {
+  color: #fff;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7),
+               5px 5px 1px rgba(225, 225, 225, 0.7),
+               6px 6px 2px rgba(0,0,0,0.7),
+               10px 10px 1px rgba(180, 180, 180, 0.7),
+               11px 11px 2px rgba(0,0,0,0.7),
+               15px 15px 1px rgba(120, 120, 120, 0.7),
+               16px 16px 2px rgba(0,0,0,0.7);
+}
+textarea {
+  background-color: #111;
+  display: block;
+  color: #fff;
+  border: 0 none;
+  overflow: hidden;
+  box-shadow: 0 4px 16px -2px rgba(0,0,0,0.8);
+  padding: 0.5rem;
+  width: 75%;
+  height: 50%;
+  margin: auto;
+  font-family: Console, monospace;
+  opacity: 0;
+  visibility: hidden;
+  margin-bottom: 1rem;
+}
+textarea:focus {
+  outline: 0 none;
+}
+button {
+  flex: 1;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+  padding: 1.5rem 3.125rem;
+  border: 0.5rem solid #284cff;
+  font-family: Console, monospace;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  background-image: url(https://web.archive.org/web/20160312084140im_/http://splatoon.nintendo.com/assets/img/nav-bg-fill-blue.png?1443460871);
+  background-repeat: repeat-x;
+  background-position: 0 -100%;
+  transition: 1.5s ease;
+  filter: hue-rotate(140deg);
+  opacity: 0;
+  visibility: hidden;
+}
+button:focus {
+  outline: 0 none;
+}
+button:hover {
+  background-position: 500% 100%;
+}
+@keyframes text-snake {
+  from {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7),
+       	         5px 5px 1px rgba(225, 225, 225, 0.7),
+       	         6px 6px 2px rgba(0,0,0,0.7),
+       	         10px 10px 1px rgba(180, 180, 180, 0.7),
+       	         11px 11px 2px rgba(0,0,0,0.7),
+       	         15px 15px 1px rgba(120, 120, 120, 0.7),
+       	         16px 16px 2px rgba(0,0,0,0.7);
+  }
+  to {
+    text-shadow: -1px 1px 2px rgba(0,0,0,0.7),
+       	         -5px 5px 1px rgba(225, 225, 225, 0.7),
+       	         -6px 6px 2px rgba(0,0,0,0.7),
+       	         -10px 10px 1px rgba(180, 180, 180, 0.7),
+       	         -11px 11px 2px rgba(0,0,0,0.7),
+       	         -15px 15px 1px rgba(120, 120, 120, 0.7),
+       	         -16px 16px 2px rgba(0,0,0,0.7);
+  }
+}

@@ -6,7 +6,7 @@ function ajaxCall(iterate){
     url: getUrl + iterate,
     type: 'GET',
     beforeSend: function() {
-      $(".copy").prepend('<p class="loadingScrape">Scraping...</p>');
+      $(".copy .loadingScrape").addClass("visible");
     },
     complete: function() {
 
@@ -87,17 +87,19 @@ function ajaxCall(iterate){
       $("."+iterate+".after").append("<span>],</span>");
 
       if(iterate++ < endDate) {
+        $(".loadingScrape").removeClass("visible");
         ajaxCall(iterate);
       }
       else {
+        $(".loadingScrape").removeClass("visible");
         $(".before>p").not(":last-of-type").append("<span>,</span");
         $(".after:last-of-type").empty().append("<span>]</span>");
         var completeJSON = $(".table").text();
         var textarea = $("#copy");
         textarea.val(completeJSON);
-        $(".loadingScrape").hide(400);
-        $(".copy").prepend("<p>Scraping done!</p>");
-        $(".copy button").show(400);
+        $(".copy").prepend('<h1 class="doneScrape">Scraping done!</h1>');
+        $(".copy button").addClass("visible");
+        $("#copy").addClass("visible");
       }
     },
     error: function(error) {
@@ -108,9 +110,7 @@ function ajaxCall(iterate){
 ajaxCall(startDate);
 
 function copyFunction() {
-  $(".copy #copy").show(400);
-  var copy = $("#copy");
-  copy.select();
+  $("#copy").select();
   document.execCommand("copy");
   alert("Copied to clipboard!");
 }
