@@ -23,7 +23,7 @@ function ajaxCall(iterate){
         var playerID = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").attr("id"); // get playerID
         var playerName = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:first-of-type>td.hauptlink>a").text(); // get playerName
         var position = $(this).find(">td:nth-of-type(2)").find("table>tbody>tr:last-of-type>td").text(); // get players position
-        var year = $("select[name='saison_id'] option[selected='selected']").val(); // get year of transfer
+        var year = $(data).find("select[name='saison_id'] option[selected='selected']").val(); // get year of transfer
         var yearLink = getUrl + year; // get yearLink of transfer
         var nationalities = $(this).find(">td:nth-of-type(4)>img"); // get nationalities
         if(nationalities.length===2){ // check if there are 2 nationaities
