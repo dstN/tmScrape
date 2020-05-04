@@ -95,8 +95,9 @@ function ajaxCall(iterate){
         $(".before>p").not(":last-of-type").append("<span>,</span");
         $(".after:last-of-type").empty().append("<span>]</span>");
         var completeJSON = $(".table").text();
-        var textarea = $("#copy");
-        textarea.val(completeJSON);
+        completeJSON = JSON.parse(completeJSON);
+        completeJSON = JSON.stringify(completeJSON, undefined, 2);
+        jsonoutput(syntaxHighlight(completeJSON));
         $(".copy").prepend('<h1 class="doneScrape">Scraping done!</h1>');
         $(".copy button").addClass("visible");
         $("#copy").addClass("visible");
@@ -113,4 +114,26 @@ function copyFunction() {
   $("#copy").select();
   document.execCommand("copy");
   alert("Copied to clipboard!");
+}
+
+function jsonoutput(input) {
+  document.getElementById("copy").innerHTML = input;
+}
+function syntaxHighlight(json) {
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
 }
