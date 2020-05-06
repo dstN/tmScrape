@@ -1,20 +1,21 @@
 var startDate = 1956; // first year a transfer fee was recorded on transfermarkt.com
 var endDate = new Date().getFullYear(); // current Year
 var getUrl = "https://www.transfermarkt.com/transfers/transferrekorde/statistik/top/saison_id/"; // ADD Year after saison_id/
-function ajaxCall(iterate){
+function ajaxCall(startyear, endyear){
   $.ajax({
-    url: getUrl + iterate,
+    url: getUrl + startyear,
     type: 'GET',
     beforeSend: function() {
       $(".copy .loadingScrape").addClass("visible");
+      $(".form").removeClass("visible");
     },
     complete: function() {
 
     },
     success: function(data) {
-      var currentYearString = '"'+iterate+'"';
-      $(".json").append('<div class="'+iterate+' before">'+currentYearString+': [ </div>');
-      $(".json").append('<div class="'+iterate+' after"></div>');
+      var currentYearString = '"'+startyear+'"';
+      $(".json").append('<div class="'+startyear+' before">'+currentYearString+': [ </div>');
+      $(".json").append('<div class="'+startyear+' after"></div>');
       var tableRows = $(data).find(".items>tbody>tr");
       tableRows.each(function() {
         var rank = $(this).find(">td:first-of-type").text(); // get rank within year
@@ -82,13 +83,13 @@ function ajaxCall(iterate){
           transferHistoryLink: "https://www.transfermarkt.com" + transferHistoryLink
         };
         var playerJSON = JSON.stringify(playerObj); // object to JSON
-        $("."+iterate+".before").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
+        $("."+startyear+".before").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
       });
-      $("."+iterate+".after").append("<span>],</span>");
+      $("."+startyear+".after").append("<span>],</span>");
 
-      if(iterate++ < endDate) {
+      if(startyear++ < endyear) {
         $(".loadingScrape").removeClass("visible");
-        ajaxCall(iterate);
+        ajaxCall(startyear);
       }
       else {
         $(".loadingScrape").removeClass("visible");
@@ -98,6 +99,7 @@ function ajaxCall(iterate){
         completeJSON = JSON.parse(completeJSON);
         completeJSON = JSON.stringify(completeJSON, undefined, 2);
         jsonoutput(syntaxHighlight(completeJSON));
+        $(".copy").addClass("visible");
         $(".copy").prepend('<h1 class="doneScrape">Scraping done!</h1>');
         $(".copy button").addClass("visible");
         $("#copy").addClass("visible");
@@ -108,14 +110,37 @@ function ajaxCall(iterate){
     }
   });
 }
-ajaxCall(startDate);
+function scrape() {
+  $(".form span").remove();
+  var startSelect = document.getElementById("startyear");
+  var endSelect = document.getElementById("endyear");
+  var startValue = startSelect.options[startSelect.selectedIndex].value;
+  var endValue = endSelect.options[endSelect.selectedIndex].value;
 
+  if(!startValue) {
+    $('<span class="key">Error: Please select a starting year.</span>').insertBefore("#submitButton");
+  }
+  else if(!endValue) {
+    $('<span class="key">Error: Please select an ending year.</span>').insertBefore("#submitButton");
+  }
+  else if(startValue > endValue) {
+    $('<span class="key">Error: The starting year must be lower than the ending year.</span>').insertBefore("#submitButton");
+  }
+  else {
+    ajaxCall(startValue, endValue);
+  }
+}
 function copyFunction() {
   $("#copy").select();
   document.execCommand("copy");
   alert("Copied to clipboard!");
 }
-
+function scrapeReset() {
+  $(".copy pre").empty();
+  $(".copy .doneScrape").remove();
+  $(".copy, .copy pre, .copy button").removeClass("visible");
+  $(".form").addClass("visible");
+}
 function jsonoutput(input) {
   document.getElementById("copy").innerHTML = input;
 }

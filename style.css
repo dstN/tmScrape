@@ -3,6 +3,12 @@ html {
   background-color: #252525;
   color: #fff;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
 }
 ::selection {
   background: #e03100;
@@ -12,10 +18,6 @@ html {
   background: #e03100;
   color: #fff;
 }
-body>*{
-  display: none !important;
-  visibility: hidden !important;
-}
 .table {
   display: none !important;
   visibility: hidden !important;
@@ -23,6 +25,11 @@ body>*{
 .copy {
   display: block !important;
   visibility: visible !important;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: 0;
 }
 .loadingScrape {
   opacity: 0;
@@ -40,11 +47,6 @@ body>*{
   -moz-animation: text-snake 1s infinite alternate;
   -ms-animation: text-snake 1s infinite alternate;
   animation: text-snake 1s infinite alternate;
-}
-.visible {
-  opacity: 1;
-  visibility: visible;
-  transition: all ease-in-out 1.5s;
 }
 .doneScrape {
   color: #fff;
@@ -131,4 +133,115 @@ button:hover {
        	         -15px 15px 1px rgba(120, 120, 120, 0.7),
        	         -16px 16px 2px rgba(0,0,0,0.7);
   }
+}
+.form-control {
+  display: block;
+  margin-bottom: 10px;
+}
+.form-control label {
+  display: block;
+  margin-bottom: 10px;
+}
+.form {
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease-in-out 1.5s;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: all ease-in-out 1.5s;
+  z-index: 99;
+}
+/* Selectboxes */
+.select-hidden {
+  display: none;
+  visibility: hidden;
+  padding-right: 10px;
+}
+
+.select {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  color: #fff;
+  width: 220px;
+  height: 40px;
+}
+
+.select-styled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #284cff;
+  filter: hue-rotate(140deg);
+  padding: 8px 15px;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.select-styled:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+.select-styled:hover {
+  background-color: #252525;
+  filter: hue-rotate(0deg);
+}
+.select-styled:active, .select-styled.active {
+  background-color: #252525;
+  filter: hue-rotate(0deg);
+}
+.select-styled:active:after, .select-styled.active:after {
+  top: 9px;
+  border-color: transparent transparent #fff transparent;
+}
+
+.select-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: #284cff;
+  filter: hue-rotate(140deg);
+  max-height: 35vh;
+  overflow-y: scroll;
+}
+.select-options li {
+  margin: 0;
+  padding: 12px 0;
+  text-indent: 15px;
+  border-top: 1px solid #252525;
+  -moz-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+  -webkit-transition: all 0.15s ease-in;
+  transition: all 0.15s ease-in;
+}
+.select-options li:hover {
+  color: #c0392b;
+  background: #fff;
+}
+.select-options li[rel="hide"] {
+  display: none;
 }
