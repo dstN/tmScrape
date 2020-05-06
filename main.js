@@ -86,10 +86,8 @@ function ajaxCall(startyear, endyear){
         $("."+startyear+".before").append("<p id='"+playerID+"'>"+playerJSON+"</p>"); // parse json to browser
       });
       $("."+startyear+".after").append("<span>],</span>");
-
       if(startyear++ < endyear) {
-        $(".loadingScrape").removeClass("visible");
-        ajaxCall(startyear);
+        ajaxCall(startyear, endyear);
       }
       else {
         $(".loadingScrape").removeClass("visible");
@@ -99,10 +97,8 @@ function ajaxCall(startyear, endyear){
         completeJSON = JSON.parse(completeJSON);
         completeJSON = JSON.stringify(completeJSON, undefined, 2);
         jsonoutput(syntaxHighlight(completeJSON));
-        $(".copy").addClass("visible");
-        $(".copy").prepend('<h1 class="doneScrape">Scraping done!</h1>');
-        $(".copy button").addClass("visible");
-        $("#copy").addClass("visible");
+        $(".copy .copyinner").addClass("visible");
+        $(".copy .loadingScrape").addClass("doneScrape").removeClass("loadingScrape").text("Scraping done!");
       }
     },
     error: function(error) {
@@ -136,10 +132,11 @@ function copyFunction() {
   alert("Copied to clipboard!");
 }
 function scrapeReset() {
+  $(".table .json").empty();
   $(".copy pre").empty();
-  $(".copy .doneScrape").remove();
-  $(".copy, .copy pre, .copy button").removeClass("visible");
+  $(".copyinner").removeClass("visible");
   $(".form").addClass("visible");
+  $(".copy .doneScrape").addClass("loadingScrape").text("Scraping...");
 }
 function jsonoutput(input) {
   document.getElementById("copy").innerHTML = input;
