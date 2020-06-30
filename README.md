@@ -1,15 +1,17 @@
 # tmScrape
-local web scraping of the (max first 25 entries) transfer records from transfermarkt.com
-# usage
+Local web scraping of the (max first 25 entries) transfer records from transfermarkt.com
+# Usage
 Just clone/download the repository and open index.html in your browser.
 
-Wait until "Scraping done!" appears and click on "Copy to clipboard"
+Choose the starting year and the ending year, click on "Submit".
 
-It takes a moment until it copies everything. If it's done copying you get an alert.
+Wait until it says "Scraping done!" on screen. It takes a moment.
 
-# format
-every player comes in a json-object. with following data within:
-* Rank within his Transfer-Year
+You should see a box with the json output and can either copy it yourself or click on "Copy to clipboard", or if you are fancy just scrape another timeframe.
+
+# Format
+Every player comes in a json-object. with following data within:
+* Rank within his transfer-year
 * Picture of the Player (Link from transfermarkt.com)
 * Link to the Players Profile on transfermarkt.com
 * Player Name
@@ -18,18 +20,18 @@ every player comes in a json-object. with following data within:
 * Link to the year of the transfer
 * Nationalit(ies)(y)
 * Nationality-Flag(s)
-* The joined Club
-* Link to the joined Club
-* Emblem of the joined Club
-* League Nationality
-* League Nationality Flag
+* The joined club
+* Link to the joined club
+* Emblem of the joined club
+* League nationality
+* League nationality Flag
 * League
-* League Link
-* Transfer Fee
-* Transfer Fee Tooltip
+* League link
+* Transfer fee
+* Transfer fee Tooltip
 * Transfer history link
 
-# license
+# License
 MIT License
 
 Copyright (c) 2020 Dustin Tramm
