@@ -1,7 +1,7 @@
 # tmScrape
 Local web scraping of the (max first 25 entries) transfer records from transfermarkt.com
 
-Last Check: 1 Jun 2020
+Last Check: 1 Jul 2020
 # Usage
 Just clone/download the repository and open index.html in your browser.
 
